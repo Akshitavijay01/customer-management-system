@@ -14,7 +14,11 @@
       "Bash(tasklist)",
       "Bash(netstat -ano)",
       "Bash(curl -s http://localhost:8080/)",
-      "Bash(curl -s http://localhost:5000/)"
+      "Bash(curl -s http://localhost:5000/)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
