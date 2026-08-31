@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import sys; print\\(f'Python version: {sys.version}'\\)\")",
+      "Bash(python -m pip install --quiet -r requirements.txt)",
+      "Bash(python -c ' *)",
+      "Bash(python -m pytest tests/test_customers.py -v)",
+      "Bash(python -m unittest tests/test_customers.py -v)",
+      "Bash(python -m py_compile backend/app.py backend/config.py backend/extensions.py backend/models/customer_model.py backend/services/customer_service.py backend/controllers/customer_controller.py backend/database/db_connection.py backend/utils/validators.py backend/utils/logger.py run.py customer_cli.py)",
+      "Bash(chmod +x setup.sh)",
+      "Bash(python run.py)",
+      "Bash(curl -s http://localhost:5000/health)",
+      "Bash(pkill -f \"python run.py\")",
+      "Bash(tasklist)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://localhost:8080/)",
+      "Bash(curl -s http://localhost:5000/)"
+    ]
+  }
+}

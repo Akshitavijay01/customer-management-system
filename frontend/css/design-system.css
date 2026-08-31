@@ -1,0 +1,207 @@
+/* ============================================
+   DESIGN SYSTEM - MODERN CUSTOMER MANAGEMENT
+   ============================================ */
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ============================================
+     PRIMARY COLORS
+     ============================================ */
+  --primary-blue: #4A7DFF;
+  --primary-blue-hover: #3A6EEF;
+  --primary-blue-light: rgba(74, 125, 255, 0.1);
+
+  /* ============================================
+     ACTION COLORS
+     ============================================ */
+  --success-green: #22C55E;
+  --success-green-hover: #1DB954;
+  --purple: #9333EA;
+  --purple-hover: #7C28D1;
+  --orange: #F97316;
+  --orange-hover: #E86408;
+  --red: #EF4444;
+  --red-hover: #DC3838;
+
+  /* ============================================
+     NEUTRAL COLORS
+     ============================================ */
+  --background: #F8F9FB;
+  --surface: #FFFFFF;
+  --sidebar-bg: #1E293B;
+  --sidebar-active: #334155;
+
+  /* ============================================
+     TEXT COLORS
+     ============================================ */
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* ============================================
+     BORDERS
+     ============================================ */
+  --border: #E2E8F0;
+  --border-dark: #CBD5E1;
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08);
+
+  /* ============================================
+     STATUS COLORS
+     ============================================ */
+  --status-warning-bg: #FFF7ED;
+  --status-warning-border: #FFEDD5;
+  --status-warning-text: #EA580C;
+  --status-success-bg: #F0FDF4;
+  --status-success-border: #BBF7D0;
+  --status-success-text: #16A34A;
+  --status-error-bg: #FEF2F2;
+  --status-error-border: #FECACA;
+  --status-error-text: #DC2626;
+  --status-info-bg: #EFF6FF;
+  --status-info-border: #DBEAFE;
+  --status-info-text: #2563EB;
+
+  /* ============================================
+     TYPOGRAPHY SCALE
+     ============================================ */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Font Sizes and Line Heights */
+  --font-h1: 700 28px/1.2 'Inter';
+  --font-h2: 600 20px/1.3 'Inter';
+  --font-h3: 600 16px/1.4 'Inter';
+  --font-body-large: 400 16px/1.5 'Inter';
+  --font-body: 400 14px/1.5 'Inter';
+  --font-small: 400 13px/1.4 'Inter';
+  --font-caption: 500 12px/1.3 'Inter';
+  --font-button: 600 14px/1 'Inter';
+  --font-stat-number: 700 32px/1.1 'Inter';
+  --font-stat-label: 500 12px/1.2 'Inter';
+
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+
+  /* ============================================
+     SPACING SYSTEM (8px-based)
+     ============================================ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================ */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ============================================
+     COMPONENT DIMENSIONS
+     ============================================ */
+  --sidebar-width: 230px;
+  --header-height: 64px;
+  --button-height: 40px;
+  --input-height: 40px;
+  --nav-item-height: 40px;
+
+  /* ============================================
+     TRANSITIONS
+     ============================================ */
+  --transition-fast: all 0.15s ease;
+  --transition-base: all 0.2s ease;
+  --transition-slow: all 0.3s ease;
+
+  /* ============================================
+     Z-INDEX SCALE
+     ============================================ */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* ============================================
+   GLOBAL RESETS & BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1 {
+  font: var(--font-h1);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+h2 {
+  font: var(--font-h2);
+  color: var(--text-primary);
+}
+
+h3 {
+  font: var(--font-h3);
+  color: var(--text-primary);
+}
+
+p {
+  font: var(--font-body);
+  color: var(--text-secondary);
+}
+
+/* Links */
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+a:hover {
+  color: var(--primary-blue-hover);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

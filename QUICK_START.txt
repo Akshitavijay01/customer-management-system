@@ -1,0 +1,104 @@
+╔══════════════════════════════════════════════════════════════╗
+║     CUSTOMER MANAGEMENT SYSTEM - QUICK START GUIDE          ║
+╚══════════════════════════════════════════════════════════════╝
+
+🚀 FASTEST WAY TO GET STARTED:
+
+Windows:
+  1. Double-click: setup.bat
+  2. Edit .env and add your MySQL password
+  3. Run: mysql -u root -p < database\schema.sql
+  4. Run: python run.py
+  5. Open: frontend\index.html in browser
+
+Linux/Mac:
+  1. Run: bash setup.sh
+  2. Edit .env and add your MySQL password
+  3. Run: mysql -u root -p < database/schema.sql
+  4. Run: python3 run.py
+  5. Open: frontend/index.html in browser
+
+───────────────────────────────────────────────────────────────
+
+📋 MANUAL SETUP (If setup script doesn't work):
+
+Step 1: Install Dependencies
+  pip install -r requirements.txt
+
+Step 2: Configure Database
+  • Edit .env file
+  • Change DB_PASSWORD to your MySQL password
+
+Step 3: Create Database
+  mysql -u root -p
+  source database/schema.sql
+  source database/seed.sql
+  exit
+
+Step 4: Run Application
+  python run.py  (or python3 run.py)
+
+Step 5: Open Frontend
+  Open frontend/index.html in your web browser
+
+───────────────────────────────────────────────────────────────
+
+🎯 TWO VERSIONS AVAILABLE:
+
+1. WEB VERSION (Recommended)
+   Start: python run.py
+   Then: Open frontend/index.html
+   
+2. CLI VERSION (Terminal)
+   Start: python customer_cli.py
+   Menu-driven interface in terminal
+
+───────────────────────────────────────────────────────────────
+
+⚠️  COMMON ISSUES:
+
+Issue: "Access denied for user 'root'"
+Fix: Update DB_PASSWORD in .env file
+
+Issue: "Unknown database 'customer_management'"
+Fix: Run database/schema.sql in MySQL
+
+Issue: "Module not found"
+Fix: pip install -r requirements.txt
+
+Issue: "Port 5000 already in use"
+Fix: Change FLASK_PORT in .env file
+
+───────────────────────────────────────────────────────────────
+
+📚 DOCUMENTATION:
+
+• README.md - Complete documentation
+• SETUP_GUIDE.md - Detailed setup instructions
+• PROJECT_SUMMARY.md - Project overview
+
+───────────────────────────────────────────────────────────────
+
+✅ VERIFY INSTALLATION:
+
+1. Database connection:
+   python -c "from backend.database import DatabaseConnection; DatabaseConnection.get_connection()"
+
+2. Run tests:
+   python -m unittest tests/test_customers.py
+
+3. Check backend:
+   python run.py
+   (Should start without errors)
+
+4. Check frontend:
+   Open frontend/index.html
+   (Should load customer list)
+
+───────────────────────────────────────────────────────────────
+
+🎉 THAT'S IT! Start managing customers!
+
+Need help? Check README.md or SETUP_GUIDE.md
+
+╚══════════════════════════════════════════════════════════════╝

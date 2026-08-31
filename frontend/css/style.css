@@ -1,0 +1,167 @@
+/* ============================================
+   MODERN CUSTOMER MANAGEMENT SYSTEM STYLES
+   This file contains page-specific styles
+   ============================================ */
+
+/* Page-specific overrides and enhancements */
+
+/* Dashboard/Main Page Styles */
+.dashboard-page {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: var(--space-6);
+}
+
+/* Form Container */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Stats Grid for Dashboard */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+/* Action Buttons Grid */
+.action-buttons-grid {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+/* Content Grid for Two-Column Layouts */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+/* Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.activity-item {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  transition: var(--transition-base);
+}
+
+.activity-item:hover {
+  background-color: #F1F5F9;
+}
+
+/* Detail View Table */
+.detail-table {
+  width: 100%;
+}
+
+.detail-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-table tr:last-child {
+  border-bottom: none;
+}
+
+.detail-table td {
+  padding: var(--space-3) 0;
+}
+
+.detail-table td:first-child {
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 180px;
+}
+
+.detail-table td:last-child {
+  color: var(--text-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons-grid {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons-grid {
+    flex-direction: column;
+  }
+
+  .action-card {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .detail-table td:first-child {
+    width: 120px;
+    font-size: 13px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .sidebar,
+  .sidebar-toggle,
+  .btn,
+  .search-container {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
