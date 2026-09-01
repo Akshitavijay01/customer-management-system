@@ -9,7 +9,7 @@ class Config:
 
     # Database configuration
     DB_HOST = os.getenv('DB_HOST', 'localhost')
-    DB_PORT = int(os.getenv('DB_PORT', 3306))
+    DB_PORT = int(os.getenv('DB_PORT') or 3306)
     DB_USER = os.getenv('DB_USER', 'root')
     DB_PASSWORD = os.getenv('DB_PASSWORD', '')
     DB_NAME = os.getenv('DB_NAME', 'customer_management')
@@ -17,7 +17,7 @@ class Config:
     # Flask configuration
     FLASK_ENV = os.getenv('FLASK_ENV', 'development')
     FLASK_DEBUG = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
-    FLASK_PORT = int(os.getenv('FLASK_PORT', 5000))
+    FLASK_PORT = int(os.getenv('FLASK_PORT') or 5000)
 
     # Security
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
