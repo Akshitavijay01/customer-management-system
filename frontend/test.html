@@ -53,7 +53,7 @@
             resultDiv.innerHTML = 'Testing...';
 
             try {
-                const response = await fetch('http://localhost:5000/health');
+                const response = await fetch('/health');
                 const data = await response.json();
 
                 if (data.success) {
@@ -83,7 +83,7 @@
             console.log('Sending data:', customerData);
 
             try {
-                const response = await fetch('http://localhost:5000/api/customers/', {
+                const response = await fetch('/api/customers/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

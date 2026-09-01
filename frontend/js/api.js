@@ -1,8 +1,9 @@
 // API Configuration
 // Use environment variable in production (Vercel), fallback to localhost for development
+// For plain HTML/JS without Vite, we detect environment differently
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:5000/api'
-    : (import.meta.env.VITE_API_URL || '/api');
+    : '';  // Same-origin: use relative path in production
 
 // API utility functions
 const API = {

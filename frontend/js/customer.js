@@ -90,7 +90,7 @@ async function loadCustomers(sortBy = 'created_at', sortOrder = 'DESC') {
             <div class="message message-error">
                 Failed to load customers: ${error.message}
                 <br><br>
-                Make sure the backend server is running on http://localhost:5000
+                Make sure the backend server is running and API is accessible
             </div>
         `;
     }
