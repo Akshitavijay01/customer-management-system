@@ -1,5 +1,8 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use environment variable in production (Vercel), fallback to localhost for development
+const API_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000/api'
+    : (import.meta.env.VITE_API_URL || '/api');
 
 // API utility functions
 const API = {
