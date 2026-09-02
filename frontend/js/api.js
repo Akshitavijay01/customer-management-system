@@ -3,7 +3,7 @@
 // For plain HTML/JS without Vite, we detect environment differently
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:5000/api'
-    : '';  // Same-origin: use relative path in production
+    : '/api';  // Same-origin: use /api prefix in production
 
 // API utility functions
 const API = {
