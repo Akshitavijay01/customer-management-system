@@ -35,22 +35,6 @@ class Config:
         """Return database configuration as dictionary.
         Supports both individual DB_* variables and a unified DATABASE_URL (Railway).
         """
-        # If DATABASE_URL is provided (e.g., mysql://user:pass@host:port/dbname)
-        db_url = os.getenv('DATABASE_URL')
-        if db_url:
-            try:
-                result = urlparse(db_url)
-                return {
-                    'host': result.hostname or Config.DB_HOST,
-                    'port': result.port or Config.DB_PORT,
-                    'user': result.username or Config.DB_USER,
-                    'password': result.password or Config.DB_PASSWORD,
-                    'database': result.path.lstrip('/') or Config.DB_NAME
-                }
-            except Exception as e:
-                logger.error(f"Failed to parse DATABASE_URL: {e}")
-                # fall back to individual env vars below
-        # Default to individual env vars
         config = {
             'host': Config.DB_HOST,
             'port': Config.DB_PORT,
@@ -58,12 +42,35 @@ class Config:
             'password': Config.DB_PASSWORD,
             'database': Config.DB_NAME
         }
-        # For production, add connection pooling settings
+
+        # If DATABASE_URL is provided (e.g., mysql://user:pass@host:port/dbname)
+        db_url = os.getenv('DATABASE_URL')
+        if db_url:
+            try:
+                result = urlparse(db_url)
+                config.update({
+                    'host': result.hostname or Config.DB_HOST,
+                    'port': result.port or Config.DB_PORT,
+                    'user': result.username or Config.DB_USER,
+                    'password': result.password or Config.DB_PASSWORD,
+                    'database': result.path.lstrip('/') or Config.DB_NAME
+                })
+            except Exception as e:
+                logger.error(f"Failed to parse DATABASE_URL: {e}")
+
+        # Vercel Serverless specific connection fixes
         if Config.is_production():
-            config.update({
-                'pool_name': 'cms_pool',
-                'pool_size': 5,
-                'pool_reset_session': True,
-                'connect_timeout': 10000
-            })
+            # For remote cloud databases, SSL is usually required
+            config['ssl_disabled'] = False
+            config['ssl_verify_cert'] = False
+            config['ssl_verify_identity'] = False
+
+            # Use quick timeout for serverless environments (10 seconds)
+            config['connect_timeout'] = 10
+
+            # REMOVED: connection pooling settings.
+            # Serverless environments scale to zero and freeze execution states.
+            # Local connection pools often cause "MySQL connection not available"
+            # and hang when process freezes.
+
         return config

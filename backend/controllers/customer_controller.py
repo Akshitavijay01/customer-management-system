@@ -62,7 +62,7 @@ class CustomerController:
             logger.error(f"Error in get all customers: {e}")
             return jsonify({
                 'success': False,
-                'message': 'An error occurred while fetching customers',
+                'message': f'An error occurred: {str(e)}',
                 'data': None
             }), 500
 
