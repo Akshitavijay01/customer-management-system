@@ -36,7 +36,7 @@ class CustomerController:
             logger.error(f"Error in create customer: {e}")
             return jsonify({
                 'success': False,
-                'message': 'An error occurred while creating customer',
+                'message': f'An error occurred: {str(e)}',
                 'data': None
             }), 500
 

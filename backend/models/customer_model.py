@@ -7,18 +7,36 @@ class CustomerModel:
     @staticmethod
     def create(customer_data):
         """Create a new customer"""
-        # Don't generate customer_id - let MySQL auto-increment handle it
+        # Generate custom customer_id format (CUST-YYYY-NNNN)
+        if 'customer_id' not in customer_data or not customer_data['customer_id']:
+            customer_data['customer_id'] = DatabaseConnection.generate_customer_id()
+
+        # Ensure all required dictionary keys exist
+        data_to_insert = {
+            'customer_id': customer_data['customer_id'],
+            'first_name': customer_data.get('first_name'),
+            'last_name': customer_data.get('last_name'),
+            'email': customer_data.get('email'),
+            'phone': customer_data.get('phone'),
+            'address': customer_data.get('address'),
+            'city': customer_data.get('city'),
+            'state': customer_data.get('state'),
+            'postal_code': customer_data.get('postal_code'),
+            'date_of_birth': customer_data.get('date_of_birth'),
+            'gender': customer_data.get('gender') or 'Other'
+        }
+
         query = """
             INSERT INTO customers
-            (first_name, last_name, email, phone, address, city, state, postal_code, date_of_birth, gender)
-            VALUES (%(first_name)s, %(last_name)s, %(email)s, %(phone)s, %(address)s,
+            (customer_id, first_name, last_name, email, phone, address, city, state, postal_code, date_of_birth, gender)
+            VALUES (%(customer_id)s, %(first_name)s, %(last_name)s, %(email)s, %(phone)s, %(address)s,
                     %(city)s, %(state)s, %(postal_code)s, %(date_of_birth)s, %(gender)s)
         """
 
         try:
-            customer_id = DatabaseConnection.execute(query, customer_data)
-            logger.info(f"Customer created with ID: {customer_id}")
-            return customer_id
+            DatabaseConnection.execute(query, data_to_insert)
+            logger.info(f"Customer created with ID: {data_to_insert['customer_id']}")
+            return data_to_insert['customer_id']
         except Exception as e:
             logger.error(f"Error creating customer: {e}")
             raise
