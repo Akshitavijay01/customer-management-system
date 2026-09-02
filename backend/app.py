@@ -46,6 +46,25 @@ def create_app():
             'status': 'healthy'
         })
 
+    # Debug DB configuration safely (masks password)
+    @app.route('/api/db-status')
+    def db_status():
+        db_cfg = Config.get_db_config()
+        # Mask sensitive data
+        safe_cfg = {
+            'host': db_cfg.get('host'),
+            'port': db_cfg.get('port'),
+            'user': db_cfg.get('user'),
+            'database': db_cfg.get('database'),
+            'has_password': bool(db_cfg.get('password')),
+            'has_database_url': bool(os.getenv('DATABASE_URL')),
+            'flask_env': os.getenv('FLASK_ENV')
+        }
+        return jsonify({
+            'success': True,
+            'config': safe_cfg
+        })
+
     # Error handlers
     @app.errorhandler(404)
     def not_found(error):

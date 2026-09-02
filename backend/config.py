@@ -33,30 +33,48 @@ class Config:
     @staticmethod
     def get_db_config():
         """Return database configuration as dictionary.
-        Supports both individual DB_* variables and a unified DATABASE_URL (Railway).
+        Supports both individual DB_* variables and a unified DATABASE_URL.
         """
-        config = {
-            'host': Config.DB_HOST,
-            'port': Config.DB_PORT,
-            'user': Config.DB_USER,
-            'password': Config.DB_PASSWORD,
-            'database': Config.DB_NAME
-        }
+        # Read from DATABASE_URL first
+        db_url = os.getenv('DATABASE_URL', '').strip()
 
-        # If DATABASE_URL is provided (e.g., mysql://user:pass@host:port/dbname)
-        db_url = os.getenv('DATABASE_URL')
         if db_url:
             try:
                 result = urlparse(db_url)
-                config.update({
-                    'host': result.hostname or Config.DB_HOST,
-                    'port': result.port or Config.DB_PORT,
-                    'user': result.username or Config.DB_USER,
-                    'password': result.password or Config.DB_PASSWORD,
-                    'database': result.path.lstrip('/') or Config.DB_NAME
-                })
+                # urlparse handles mysql://user:pass@host:port/dbname
+                host = result.hostname
+                port = result.port or 3306
+                user = result.username
+                password = result.password
+                database = result.path.lstrip('/')
+
+                logger.info(f"Using DATABASE_URL: host={host}, port={port}, user={user}, db={database}")
+
+                config = {
+                    'host': host,
+                    'port': port,
+                    'user': user,
+                    'password': password,
+                    'database': database
+                }
             except Exception as e:
                 logger.error(f"Failed to parse DATABASE_URL: {e}")
+                config = {
+                    'host': os.getenv('DB_HOST', 'localhost'),
+                    'port': int(os.getenv('DB_PORT') or 3306),
+                    'user': os.getenv('DB_USER', 'root'),
+                    'password': os.getenv('DB_PASSWORD', ''),
+                    'database': os.getenv('DB_NAME', 'customer_management')
+                }
+        else:
+            # Fallback to individual DB_* env vars
+            config = {
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT') or 3306),
+                'user': os.getenv('DB_USER', 'root'),
+                'password': os.getenv('DB_PASSWORD', ''),
+                'database': os.getenv('DB_NAME', 'customer_management')
+            }
 
         # Vercel Serverless specific connection fixes
         if Config.is_production():
@@ -64,13 +82,6 @@ class Config:
             config['ssl_disabled'] = False
             config['ssl_verify_cert'] = False
             config['ssl_verify_identity'] = False
-
-            # Use quick timeout for serverless environments (10 seconds)
             config['connect_timeout'] = 10
-
-            # REMOVED: connection pooling settings.
-            # Serverless environments scale to zero and freeze execution states.
-            # Local connection pools often cause "MySQL connection not available"
-            # and hang when process freezes.
 
         return config
