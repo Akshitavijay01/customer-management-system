@@ -2,8 +2,9 @@
 
 // Load page on startup
 document.addEventListener('DOMContentLoaded', () => {
-    loadPage('customers');
+    loadPage('dashboard');
     initializeSidebar();
+    initializeTheme();
 });
 
 /**
@@ -60,6 +61,9 @@ function loadPage(page) {
     });
 
     switch(page) {
+        case 'dashboard':
+            loadDashboard();
+            break;
         case 'customers':
             loadCustomers();
             break;
@@ -67,6 +71,25 @@ function loadPage(page) {
             loadAddCustomerForm();
             break;
         default:
-            loadCustomers();
+            loadDashboard();
     }
+}
+
+/**
+ * Initialize theme toggle
+ */
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+/**
+ * Toggle dark/light mode
+ */
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
 }

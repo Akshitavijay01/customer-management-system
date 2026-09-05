@@ -53,6 +53,13 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  /* ============================================
+     STAT CARD TRENDS
+     ============================================ */
+  --trend-positive: #16A34A;
+  --trend-neutral: #64748B;
 
   /* ============================================
      STATUS COLORS
@@ -144,6 +151,156 @@
 }
 
 /* ============================================
+   DARK MODE THEME
+   ============================================ */
+[data-theme="dark"] {
+  /* ============================================
+     PRIMARY COLORS
+     ============================================ */
+  --primary-blue: #60A5FA;
+  --primary-blue-hover: #93C5FD;
+  --primary-blue-light: rgba(96, 165, 250, 0.15);
+
+  /* ============================================
+     ACTION COLORS
+     ============================================ */
+  --success-green: #4ADE80;
+  --success-green-hover: #86EFAC;
+  --purple: #C084FC;
+  --purple-hover: #D8B4FE;
+  --orange: #FB923C;
+  --orange-hover: #FDBA74;
+  --red: #F87171;
+  --red-hover: #FCA5A5;
+
+  /* ============================================
+     NEUTRAL COLORS
+     ============================================ */
+  --background: #0F172A;
+  --surface: #1E293B;
+  --sidebar-bg: #0F172A;
+  --sidebar-active: #334155;
+
+  /* ============================================
+     TEXT COLORS
+     ============================================ */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+
+  /* ============================================
+     BORDERS
+     ============================================ */
+  --border: #334155;
+  --border-dark: #475569;
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+
+  /* ============================================
+     STAT CARD TRENDS
+     ============================================ */
+  --trend-positive: #4ADE80;
+  --trend-neutral: #94A3B8;
+
+  /* ============================================
+     STATUS STYLES
+     ============================================ */
+  --status-success-bg: rgba(74, 222, 128, 0.12);
+  --status-success-border: rgba(74, 222, 128, 0.3);
+  --status-success-text: #4ADE80;
+  --status-warning-bg: rgba(251, 146, 60, 0.12);
+  --status-warning-border: rgba(251, 146, 60, 0.3);
+  --status-warning-text: #FB923C;
+  --status-error-bg: rgba(248, 113, 113, 0.12);
+  --status-error-border: rgba(248, 113, 113, 0.3);
+  --status-error-text: #F87171;
+  --status-info-bg: rgba(96, 165, 250, 0.12);
+  --status-info-border: rgba(96, 165, 250, 0.3);
+  --status-info-text: #60A5FA;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .table-container {
+  background-color: #1E293B;
+  border-color: #334155;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] thead {
+  background-color: #0F172A;
+}
+
+[data-theme="dark"] tbody tr:hover {
+  background-color: rgba(51, 65, 85, 0.4);
+}
+
+[data-theme="dark"] .search-box {
+  background-color: #1E293B;
+  border-color: #334155;
+  color: #F1F5F9;
+}
+
+[data-theme="dark"] .search-box:focus {
+  border-color: #60A5FA;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea {
+  background-color: #1E293B;
+  border-color: #334155;
+  color: #F1F5F9;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: #1E293B;
+  border: 1px solid #334155;
+}
+
+[data-theme="dark"] .toast {
+  background-color: #1E293B;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .sidebar {
+  background-color: #0F172A;
+  border-right: 1px solid #1E293B;
+}
+
+[data-theme="dark"] .recent-customer-avatar {
+  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+}
+
+[data-theme="dark"] .stat-card-icon.blue {
+  background-color: rgba(96, 165, 250, 0.15);
+  color: #60A5FA;
+}
+
+[data-theme="dark"] .stat-card-icon.green {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: #4ADE80;
+}
+
+[data-theme="dark"] .stat-card-icon.purple {
+  background-color: rgba(192, 132, 252, 0.15);
+  color: #C084FC;
+}
+
+[data-theme="dark"] .stat-card-icon.orange {
+  background-color: rgba(251, 146, 60, 0.15);
+  color: #FB923C;
+}
+
+/* ============================================
    GLOBAL RESETS & BASE STYLES
    ============================================ */
 * {
@@ -160,6 +317,7 @@ body {
   background-color: var(--background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Typography */
